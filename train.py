@@ -52,7 +52,7 @@ def train(
     weight_border = torch.tensor(weight_border_init, dtype=torch.float32, device=device)
     weight_data = torch.tensor(weight_data_init, dtype=torch.float32, device=device)
 
-    nb_batch = 100  #### A changer
+    nb_batches = 1000  #### A changer
     batch_size = torch.tensor(batch_size, device=device, dtype=torch.int64)
 
     Re = torch.tensor(Re, dtype=torch.float32, device=device)
@@ -87,9 +87,7 @@ def train(
         data_batch = torch.tensor([0.0], device=device)
         border_batch = torch.tensor([0.0], device=device)
         model.train()  # on dit qu'on va entrainer (on a le dropout)
-        for nb_batch, batch in enumerate(
-            torch.tensor([k for k in range(nb_batch)], device=device)
-        ):
+        for nb_batch in range(nb_batches):
             with torch.cuda.stream(stream_data):
                 X_train_batch = (
                     X_train[
