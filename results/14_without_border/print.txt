@@ -1,0 +1,19 @@
+Nouveau modèle
+
+--------------------------
+Starting at epoch: 0
+--------------------------
+---------------------
+Epoch 1/1000 :
+Train : loss: nan, data: nan, border: nan
+Test  : loss: nan, data: nan, border: nan
+Weights  : ------------, data: 1.0e+00,   border: 0.0e+00
+time: 57s
+time: 46s
+---------------------
+Epoch 2/1000 :
+Train : loss: nan, data: nan, border: nan
+Test  : loss: nan, data: nan, border: nan
+Weights  : ------------, data: 1.0e+00,   border: 0.0e+00
+time: 103s
+time: 46s

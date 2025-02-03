@@ -1,0 +1,33 @@
+Nouveau modèle
+
+--------------------------
+Starting at epoch: 0
+--------------------------
+---------------------
+Epoch 1/1000 :
+Train : loss: 9.524e-02, data: 9.524e-02, border: 2.383e-01
+Test  : loss: 1.780e-02, data: 1.780e-02, border: 1.767e-01
+Weights  : ------------, data: 1.0e+00,   border: 0.0e+00
+time: 76s
+time: 57s
+---------------------
+Epoch 2/1000 :
+Train : loss: 6.060e-03, data: 6.060e-03, border: 1.770e-01
+Test  : loss: 8.567e-03, data: 8.567e-03, border: 1.656e-01
+Weights  : ------------, data: 1.0e+00,   border: 0.0e+00
+time: 140s
+time: 64s
+---------------------
+Epoch 3/1000 :
+Train : loss: 4.244e-03, data: 4.244e-03, border: 1.747e-01
+Test  : loss: 6.309e-03, data: 6.309e-03, border: 1.630e-01
+Weights  : ------------, data: 1.0e+00,   border: 0.0e+00
+time: 203s
+time: 63s
+---------------------
+Epoch 4/1000 :
+Train : loss: 3.510e-03, data: 3.510e-03, border: 1.748e-01
+Test  : loss: 5.195e-03, data: 5.195e-03, border: 1.664e-01
+Weights  : ------------, data: 1.0e+00,   border: 0.0e+00
+time: 261s
+time: 58s

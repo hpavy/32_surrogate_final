@@ -56,21 +56,6 @@ def train(
     batch_size = torch.tensor(batch_size, device=device, dtype=torch.int64)
 
     Re = torch.tensor(Re, dtype=torch.float32, device=device)
-    ya0_mean = mean_std["ya0_mean"].clone().to(device)
-    ya0_std = mean_std["ya0_std"].clone().to(device)
-    w0_mean = mean_std["w0_mean"].clone().to(device)
-    w0_std = mean_std["w0_std"].clone().to(device)
-    x_std = mean_std["x_std"].clone().to(device)
-    y_std = mean_std["y_std"].clone().to(device)
-    u_mean = mean_std["u_mean"].clone().to(device)
-    v_mean = mean_std["v_mean"].clone().to(device)
-    p_std = mean_std["p_std"].clone().to(device)
-    t_std = mean_std["t_std"].clone().to(device)
-    t_mean = mean_std["t_mean"].clone().to(device)
-    u_std = mean_std["u_std"].clone().to(device)
-    v_std = mean_std["v_std"].clone().to(device)
-    L_adim = torch.tensor(param_adim["L"], device=device, dtype=torch.float32)
-    V_adim = torch.tensor(param_adim["V"], device=device, dtype=torch.float32)
     X_border = X_border.to(device)
     X_border_test = X_border_test.to(device).detach()
     X_train = X_train.to(device)
@@ -92,7 +77,7 @@ def train(
                 X_train_batch = (
                     X_train[
                         (nb_batch % nb_simu)
-                        * len_X_train_one : (nb_batch % nb_simu + 1)
+                        * len_X_train_one: (nb_batch % nb_simu + 1)
                         * len_X_train_one
                     ]
                     .clone()
@@ -101,7 +86,7 @@ def train(
                 U_train_batch = (
                     U_train[
                         (nb_batch % nb_simu)
-                        * len_X_train_one : (nb_batch % nb_simu + 1)
+                        * len_X_train_one: (nb_batch % nb_simu + 1)
                         * len_X_train_one
                     ]
                     .clone()
@@ -109,7 +94,8 @@ def train(
                 )
                 # loss des points de data
                 pred_data = model(X_train_batch)
-                loss_data = loss(U_train_batch, pred_data)
+                # loss_data = loss(U_train_batch, pred_data)
+                loss_data = 1/10 * torch.mean((U_train_batch[:, 0]-pred_data[:, 0])**2) + 1/10 * torch.mean((U_train_batch[:, 1]-pred_data[:, 1])**2) + 100/10 * torch.mean((U_train_batch[:, 2]-pred_data[:, 2])**2)
 
             with torch.cuda.stream(stream_border):
                 # loss du border

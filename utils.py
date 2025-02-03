@@ -51,15 +51,22 @@ def charge_data(hyper_param, param_adim):
     t_max = hyper_param["t_min"] + hyper_param["nb_period"] / f
     for k in range(nb_simu):
         df = pd.read_csv("data/" + hyper_param["file"][k])
+        # df_modified = df.loc[
+        #     (df["Points:0"] >= hyper_param["x_min"])
+        #     & (df["Points:0"] <= hyper_param["x_max"])
+        #     & (df["Points:1"] >= hyper_param["y_min"])
+        #     & (df["Points:1"] <= hyper_param["y_max"])
+        #     & (df["Time"] > hyper_param["t_min"])
+        #     & (df["Time"] < t_max)
+        #     & (df["Points:2"] == 0.0)
+        #     & (df["Points:0"] ** 2 + df["Points:1"] ** 2 > (0.025 / 2) ** 2),
+        #     :,
+        # ].copy()
         df_modified = df.loc[
-            (df["Points:0"] >= hyper_param["x_min"])
-            & (df["Points:0"] <= hyper_param["x_max"])
-            & (df["Points:1"] >= hyper_param["y_min"])
-            & (df["Points:1"] <= hyper_param["y_max"])
-            & (df["Time"] > hyper_param["t_min"])
+            (df["Time"] > hyper_param["t_min"])
             & (df["Time"] < t_max)
             & (df["Points:2"] == 0.0)
-            & (df["Points:0"] ** 2 + df["Points:1"] ** 2 > (0.025 / 2) ** 2),
+            & (df["Points:0"] ** 2 + df["Points:1"] ** 2 < 1.1* (0.025 / 2) ** 2),
             :,
         ].copy()
         df_modified.loc[:, "ya0"] = hyper_param["ya0"][k]
@@ -106,6 +113,12 @@ def charge_data(hyper_param, param_adim):
         print(f"fichier n°{k} chargé")
 
     # les valeurs pour renormaliser ou dénormaliser
+    if nb_simu == 1:
+        w0_std = torch.ones(1)
+        ya0_std = torch.ones(1)
+    else: 
+        w0_std = torch.cat([w0 for w0 in w0_full], dim=0).std()
+        ya0_std = torch.cat([ya0 for ya0 in ya0_full], dim=0).std()
     mean_std = {
         "u_mean": torch.cat([u for u in u_full], dim=0).mean(),
         "v_mean": torch.cat([v for v in v_full], dim=0).mean(),
@@ -120,9 +133,9 @@ def charge_data(hyper_param, param_adim):
         "v_std": torch.cat([v for v in v_full], dim=0).std(),
         "p_std": torch.cat([p for p in p_full], dim=0).std(),
         "ya0_mean": torch.cat([ya0 for ya0 in ya0_full], dim=0).mean(),
-        "ya0_std": torch.cat([ya0 for ya0 in ya0_full], dim=0).std(),
+        "ya0_std": ya0_std,
         "w0_mean": torch.cat([w0 for w0 in w0_full], dim=0).mean(),
-        "w0_std": torch.cat([w0 for w0 in w0_full], dim=0).std(),
+        "w0_std": w0_std,
     }
 
     X_full = torch.zeros((0, 5))
@@ -182,7 +195,7 @@ def charge_data(hyper_param, param_adim):
                     y_norm_full[nb][masque][indices],
                     t_norm_full[nb][masque][indices],
                     ya0_norm_full[nb][masque][indices],
-                    torch.ones(hyper_param["nb_points_close_cylinder"]) * w_0,
+                    torch.ones(indices.shape[0]) * w_0,
                 ),
                 dim=1,
             )
@@ -209,7 +222,7 @@ def charge_data(hyper_param, param_adim):
                         y_norm_full[nb][masque][indices],
                         t_norm_full[nb][masque][indices],
                         ya0_norm_full[nb][masque][indices],
-                        torch.ones(hyper_param["nb_points"]) * w_0,
+                        torch.ones(indices.shape[0]) * w_0,
                     ),
                     dim=1,
                 )

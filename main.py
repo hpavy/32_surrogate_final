@@ -5,12 +5,51 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 print(f"Le code se lance sur {device}")
 
 
-folder_result_name = "1_try_surrogate"  # name of the result folder
+folder_result_name = "32"  # name of the result folder
 
 
 # On utilise hyper_param_init uniquement si c'est un nouveau modèle
+hyper_param_init = {
+    "H": [
+        261.39,
+    ],
+    "ya0": [
+        0.009375,
+    ],
+    "m": 1.57,
+    "file": [
+        "data_john_16_case_1.csv",
+    ],
+    "nb_epoch": 1000,
+    "save_rate": 2,
+    "dynamic_weights": False,
+    "lr_weights": 0.1,
+    "weight_data": 1.,
+    "weight_border": 0.,
+    "batch_size": 10000,
+    "nb_points_pde": 1000000,
+    "Re": 100,
+    "lr_init": 0.0005,
+    "gamma_scheduler": 0.999,
+    "nb_layers": 15,
+    "nb_neurons": 64,
+    "n_pde_test": 5000,
+    "n_data_test": 5000,
+    "nb_points": 130,
+    "x_min": -0.015,
+    "x_max": 0.015,
+    "y_min": -0.015,
+    "y_max": 0.015,
+    "t_min": 6.5,
+    "nb_period": 9,
+    "nb_period_plot": 2,
+    "nb_points_close_cylinder": 200,
+    "rayon_close_cylinder": 0.0135,
+    "nb_points_border": 200,
+    "force_inertie_bool": True
+}
 
-
+"""
 hyper_param_init = {
     "H": [
         230.67,
@@ -111,6 +150,7 @@ hyper_param_init = {
     "nb_points_border": 25,  # le nombre de points sur la condition init
     "force_inertie_bool": True,
 }
+"""
 
 
 

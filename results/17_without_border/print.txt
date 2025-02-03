@@ -1,0 +1,19 @@
+Nouveau modèle
+
+--------------------------
+Starting at epoch: 0
+--------------------------
+---------------------
+Epoch 1/1000 :
+Train : loss: 9.547e-02, data: 9.547e-02, border: 2.627e-01
+Test  : loss: 2.097e-02, data: 2.097e-02, border: 1.979e-01
+Weights  : ------------, data: 1.0e+00,   border: 0.0e+00
+time: 58s
+time: 46s
+---------------------
+Epoch 2/1000 :
+Train : loss: 6.992e-03, data: 6.992e-03, border: 2.016e-01
+Test  : loss: 1.069e-02, data: 1.069e-02, border: 1.938e-01
+Weights  : ------------, data: 1.0e+00,   border: 0.0e+00
+time: 108s
+time: 50s
