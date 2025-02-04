@@ -94,8 +94,8 @@ def train(
                 )
                 # loss des points de data
                 pred_data = model(X_train_batch)
-                # loss_data = loss(U_train_batch, pred_data)
-                loss_data = 1/10 * torch.mean((U_train_batch[:, 0]-pred_data[:, 0])**2) + 1/10 * torch.mean((U_train_batch[:, 1]-pred_data[:, 1])**2) + 100/10 * torch.mean((U_train_batch[:, 2]-pred_data[:, 2])**2)
+                loss_data = loss(U_train_batch, pred_data)
+                # loss_data = 1/10 * torch.mean((U_train_batch[:, 0]-pred_data[:, 0])**2) + 1/10 * torch.mean((U_train_batch[:, 1]-pred_data[:, 1])**2) + 100/10 * torch.mean((U_train_batch[:, 2]-pred_data[:, 2])**2)
 
             with torch.cuda.stream(stream_border):
                 # loss du border

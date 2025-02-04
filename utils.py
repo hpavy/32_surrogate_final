@@ -51,24 +51,24 @@ def charge_data(hyper_param, param_adim):
     t_max = hyper_param["t_min"] + hyper_param["nb_period"] / f
     for k in range(nb_simu):
         df = pd.read_csv("data/" + hyper_param["file"][k])
-        # df_modified = df.loc[
-        #     (df["Points:0"] >= hyper_param["x_min"])
-        #     & (df["Points:0"] <= hyper_param["x_max"])
-        #     & (df["Points:1"] >= hyper_param["y_min"])
-        #     & (df["Points:1"] <= hyper_param["y_max"])
-        #     & (df["Time"] > hyper_param["t_min"])
-        #     & (df["Time"] < t_max)
-        #     & (df["Points:2"] == 0.0)
-        #     & (df["Points:0"] ** 2 + df["Points:1"] ** 2 > (0.025 / 2) ** 2),
-        #     :,
-        # ].copy()
         df_modified = df.loc[
-            (df["Time"] > hyper_param["t_min"])
+            (df["Points:0"] >= hyper_param["x_min"])
+            & (df["Points:0"] <= hyper_param["x_max"])
+            & (df["Points:1"] >= hyper_param["y_min"])
+            & (df["Points:1"] <= hyper_param["y_max"])
+            & (df["Time"] > hyper_param["t_min"])
             & (df["Time"] < t_max)
             & (df["Points:2"] == 0.0)
-            & (df["Points:0"] ** 2 + df["Points:1"] ** 2 < 1.1* (0.025 / 2) ** 2),
+            & (df["Points:0"] ** 2 + df["Points:1"] ** 2 > (0.025 / 2) ** 2),
             :,
         ].copy()
+        # df_modified = df.loc[
+        #     (df["Time"] > hyper_param["t_min"])
+        #     & (df["Time"] < t_max)
+        #     & (df["Points:2"] == 0.0)
+        #     & (df["Points:0"] ** 2 + df["Points:1"] ** 2 < 1.1* (0.025 / 2) ** 2),
+        #     :,
+        # ].copy()
         df_modified.loc[:, "ya0"] = hyper_param["ya0"][k]
         df_modified.loc[:, "w0"] = (
             torch.pi * (hyper_param["H"][k] / hyper_param["m"]) ** 0.5

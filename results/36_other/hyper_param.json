@@ -1,0 +1,39 @@
+{
+    "H": [
+        261.39
+    ],
+    "ya0": [
+        0.010625
+    ],
+    "m": 1.57,
+    "file": [
+        "data_john_17_case_1.csv"
+    ],
+    "nb_epoch": 1000,
+    "save_rate": 2,
+    "dynamic_weights": false,
+    "lr_weights": 0.1,
+    "weight_data": 1.0,
+    "weight_border": 0.0,
+    "batch_size": 10000,
+    "nb_points_pde": 1000000,
+    "Re": 100,
+    "lr_init": 0.0005,
+    "gamma_scheduler": 0.999,
+    "nb_layers": 20,
+    "nb_neurons": 64,
+    "n_pde_test": 5000,
+    "n_data_test": 5000,
+    "nb_points": 130,
+    "x_min": -0.06,
+    "x_max": 0.06,
+    "y_min": -0.06,
+    "y_max": 0.06,
+    "t_min": 6.5,
+    "nb_period": 20,
+    "nb_period_plot": 2,
+    "nb_points_close_cylinder": 200,
+    "rayon_close_cylinder": 0.0135,
+    "nb_points_border": 200,
+    "force_inertie_bool": true
+}
